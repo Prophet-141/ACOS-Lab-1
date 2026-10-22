@@ -23,7 +23,7 @@ if ! [[ "$THRESHOLD" =~ ^[0-9]+$ ]]; then
     exit 1
 fi
 
-if [ "$THRESHOLD" -lt 0 ]  [ "$THRESHOLD" -gt 100 ]; then
+if [ "$THRESHOLD" -lt 0 ] || [ "$THRESHOLD" -gt 100 ]; then
     echo "ОШИБКА: Порог должен быть целым числом от 0 до 100."
     exit 1
 fi
@@ -41,7 +41,7 @@ fi
 # ========== Подготовка папки backup ==========
 if [ ! -d "$BACKUP_DIR" ]; then
     echo "Папка $BACKUP_DIR не найдена. Создаю..."
-    sudo mkdir -p "$BACKUP_DIR"  { echo "Не удалось создать $BACKUP_DIR"; exit 1; }
+    sudo mkdir -p "$BACKUP_DIR" || { echo "Не удалось создать $BACKUP_DIR"; exit 1; }
 fi
 
 # ========== Подсчёт размера в процентах ==========
